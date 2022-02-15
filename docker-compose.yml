@@ -2,23 +2,29 @@ version: '3'
 
 services:
   service_client:
-    build: ./service_client
-    container_name: one
+    build:
+      context: .
+      dockerfile: service_client/Dockerfile
+    container_name: client
     command: python main_client.py
     volumes:
-      - ./service_client/:/usr/src/app/
+      - ./service_client/:/app/
+      - ./pb/:/pb
     ports:
-      - 8000:8000
+      - "7000:7000"
     networks:
       - grpc
   service_server:
-    build: ./service_server
-    container_name: two
+    build:
+      context: .
+      dockerfile: service_server/Dockerfile
+    container_name: server
     command: python main_server.py
     volumes:
-      - ./service_server/:/usr/src/app/
+      - ./service_server/:/app/
+      - ./pb/:/pb
     ports:
-      - 7000:7000
+      - "50051:50051"
     networks:
       - grpc
 

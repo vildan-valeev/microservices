@@ -1,0 +1,5 @@
+# for docker !!! dont use to local
+
+aiohttp
+grpcio
+grpcio-tools

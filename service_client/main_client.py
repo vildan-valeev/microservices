@@ -21,7 +21,8 @@ class BotAPIClient(object):
     """
 
     def __init__(self):
-        self.host = 'localhost'
+        # self.host = 'localhost'
+        self.host = 'service_server'
         self.server_port = 50051
 
         # instantiate a channel
@@ -80,6 +81,7 @@ async def start(request):
     result = await get_menu('tag', 123)
     # data = {'service_two': 'service_two'}
     logging.info(result)
+    # print(type(result), type(result))
     return web.json_response(result, status=200)
 
 

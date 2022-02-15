@@ -1,16 +1,12 @@
-# pull official base image
 FROM python:3.8
 
-# set work directory
-WORKDIR /usr/src/app
+#RUN apt install wkhtmltopdf
 
-ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+COPY /pb /pb
 
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
+WORKDIR /app
+
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
-
-EXPOSE 7000
-
-COPY . .
