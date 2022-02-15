@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+service BotAPI {
+  // объявляем сервис BotMessage с методом GetMessage который будет использован на стороне сервера и будет ждать/принимать
+  // MessageRequest и отдавать MessageResponse
+  rpc GetMessage(MessageRequest) returns (MessageResponse) {}
+
+  rpc GetMenu(MenuRequest) returns (MenuResponse) {}
+}
+
+
+
+
+// передаваемые сообщения - структуры данных
+message MessageRequest {
+  string tag = 1;
+}
+
+message MessageResponse {
+  string text = 1;
+}
+
+
+
+message MenuRequest {
+  string tag = 1;
+  int64 user_id = 2;
+}
+
+message MenuResponse {
+  message Button {
+  string title = 1;
+  string callback = 2;
+  }
+  repeated Button results = 1;
+}

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  service_client:
+    build: ./service_client
+    container_name: one
+    command: python main_client.py
+    volumes:
+      - ./service_client/:/usr/src/app/
+    ports:
+      - 8000:8000
+    networks:
+      - grpc
+  service_server:
+    build: ./service_server
+    container_name: two
+    command: python main_server.py
+    volumes:
+      - ./service_server/:/usr/src/app/
+    ports:
+      - 7000:7000
+    networks:
+      - grpc
+
+networks:
+   grpc:
+       driver: bridge
