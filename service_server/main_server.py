@@ -21,31 +21,29 @@ list_response = [
 ]
 
 
-class MessageGreeter(pb2_grpc.BotMessageServicer):
+class BotAPIGreeter(pb2_grpc.BotAPIServicer):
     """Сервер который будет слушать/ждать запросы"""
 
     def GetMessage(self, request, context):
         tag = request.tag
-        print(tag)
+        print('Запрос текста', tag)
 
         result = {'text': text_to_response}
         return pb2.MessageResponse(**result)
 
-
-class MenuGreeter(pb2_grpc.BotMenuServicer):
-    # serializer_class = ButtonsSerializer
-
     def GetMenu(self, request, context):
         tag = request.tag
         user_id = request.user_id
-        print(f'{tag=} {user_id=}')
-        return pb2.MenuResponse(list_response)
+        print('Запрос меню', tag, user_id)
+
+        result = {'results': list_response}
+        return pb2.MenuResponse(**result)
 
 
 async def serve() -> None:
     server = grpc.aio.server()
-    pb2_grpc.add_BotMessageServicer_to_server(MessageGreeter(), server)
-    pb2_grpc.add_BotMenuServicer_to_server(MenuGreeter(), server)
+    pb2_grpc.add_BotAPIServicer_to_server(BotAPIGreeter(), server)
+
     listen_addr = '[::]:50051'
     server.add_insecure_port(listen_addr)
     logging.info("Starting server on %s", listen_addr)

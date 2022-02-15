@@ -8,9 +8,6 @@ service BotAPI {
   rpc GetMenu(MenuRequest) returns (MenuResponse) {}
 }
 
-
-
-
 // передаваемые сообщения - структуры данных
 message MessageRequest {
   string tag = 1;
@@ -19,8 +16,6 @@ message MessageRequest {
 message MessageResponse {
   string text = 1;
 }
-
-
 
 message MenuRequest {
   string tag = 1;
