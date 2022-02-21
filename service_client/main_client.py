@@ -3,10 +3,10 @@ from typing import Optional
 
 import grpc
 from aiohttp import web
-from google.protobuf.json_format import MessageToJson, MessageToDict
+from google.protobuf.json_format import MessageToDict
 
-from pb import main_pb2_grpc as pb2_grpc
 from pb import main_pb2 as pb2
+from pb import main_pb2_grpc as pb2_grpc
 
 app = web.Application()
 routes = web.RouteTableDef()
@@ -21,8 +21,8 @@ class BotAPIClient(object):
     """
 
     def __init__(self):
-        # self.host = 'localhost'
-        self.host = 'service_server'
+        self.host = 'localhost'         # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # self.host = 'service_server'
         self.server_port = 50051
 
         # instantiate a channel
